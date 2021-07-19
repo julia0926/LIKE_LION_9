@@ -1,0 +1,30 @@
+{% extends 'base.html' %} 
+
+{% block header %}
+<header class="masthead" style="background-image: url('assets/img/home-bg.jpg')">
+  <div class="container position-relative px-4 px-lg-5">
+      <div class="row gx-4 gx-lg-5 justify-content-center">
+          <div class="col-md-10 col-lg-8 col-xl-7">
+              <div class="site-heading">
+                  <h1>Sign_up Page</h1>
+                  <span class="subheading">회원가입 페이지입니다.</span>
+              </div>
+          </div>
+      </div>
+  </div>
+</header>
+{% endblock %}
+
+{% block content %} 
+{% load static %}
+<div class="container">
+  <body style="text-align: center">
+    <form method="POST" action="{% url 'signup' %}">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">가입</button>
+    </form>
+  </body>
+</div> 
+
+{% endblock %}

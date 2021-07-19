@@ -1,0 +1,56 @@
+{% extends 'base.html' %} 
+{% block header %}
+<header class="masthead" style="background-image: url('assets/img/home-bg.jpg')">
+  <div class="container position-relative px-4 px-lg-5">
+      <div class="row gx-4 gx-lg-5 justify-content-center">
+          <div class="col-md-10 col-lg-8 col-xl-7">
+              <div class="site-heading">
+                  <h1>My Detail Page</h1>
+                  <span class="subheading">디테일 페이지 입니다.</span>
+              </div>
+          </div>
+      </div>
+  </div>
+</header>
+{% endblock %}
+{% block content %} 
+{% load static %}
+<div class="container">
+    <div class="post-preview">
+        <a href="post.html">
+            <h2 class="post-title">{{ blog.title }}</h2>
+            <h3 class="post-subtitle">{{ blog.content }}</h3>
+        </a>
+        <p class="post-meta">
+            Posted by
+            <a href="#!">{{ blog.writer }}</a>
+            {{ blog.pub_date }}
+        </p>
+        <!--이미지 구현-->
+        {% if blog.image %}
+            <img src="{{ blog.image.url }}" width="250" height="250" alt="image error">
+        {% endif %}
+        <br>
+        <br>
+        <!--해시태그 구현-->
+        {% for hashtag in blog.hashtags.all %}
+            <span>{{ hashtag.name }}</span>
+        {% endfor %}     
+        <!--댓글 구현-->
+        {% for comment in blog.comments.all %}
+            <p>{{comment.text}}</p>
+        {% endfor %}
+        <form method="POST" action="{% url 'detail' blog.id %}">
+            {% csrf_token %}
+            <p>{{ form.as_p }}</p>
+            <input type="submit" value="submit">
+        </form>
+        <br>
+        <a class="btn btn-primary float" href="{% url 'edit' blog.id %}"> 수정하기 →</a>
+        <a class="btn btn-primary float" href="{% url 'delete' blog.id %}"> 삭제하기 →</a>
+    </div>
+</div>
+
+{% endblock %}
+
+
