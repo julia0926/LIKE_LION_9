@@ -6,4 +6,5 @@
 - 사진 업로드
 - 회원가입 & 로그인
 - CustomUser
-- Heroku 배포
+- Heroku 배포 <br>
+### [* 배포 링크 확인하기](https://juliaherokupage.herokuapp.com/)
